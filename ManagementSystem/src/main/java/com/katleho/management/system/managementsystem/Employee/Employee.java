@@ -1,14 +1,15 @@
 package com.katleho.management.system.managementsystem.Employee;
 
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
 @Table("Employee")
 public class Employee {
-    String name,surname,role;
-    @id
-    int id;
+    @Id
+    private int id;
+    private String name,surname,role;
     public Employee(String name,String surname,String role){
         this.id = UUID.randomUUID().hashCode();
         this.name = name;

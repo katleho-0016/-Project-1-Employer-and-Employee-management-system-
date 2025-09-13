@@ -16,10 +16,22 @@ public class EmployeeController {
     @PostMapping("/addEmployee")
     public Object addEmployee(@RequestBody Employee employee) {
         try{
+            if (employeeRepository.findById(employee.getId()).isPresent()) {
+                return "Employee already exists";
+            }
             return employeeRepository.save(employee);
         }catch(Exception e){
             return  e.getMessage();
         }
+    }
+
+    @DeleteMapping("/deleteEmployee/{id}")
+    public String deleteEmployee(@PathVariable Integer id) {
+        try{
+            employeeRepository.deleteById(id);
+        }catch(Exception e){
+            return "Failed to delete";
+        }return "delete successful";
     }
 
     @GetMapping("/getAllEmployees")
